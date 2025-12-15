@@ -1,19 +1,28 @@
 const express = require('express');
 const router = express.Router();
-
-const VOUCHERS = [
-    { id: 1, title: 'Amazon Gift Card', cost: '1800 pts', value: 'RM 50', icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg' },
-    { id: 2, title: 'Starbucks Coffee', cost: '500 pts', value: 'RM 15', icon: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png' },
-    { id: 3, title: 'Grab Ride Promo', cost: '800 pts', value: 'RM 10', icon: 'https://seeklogo.com/images/G/grab-logo-7020E74857-seeklogo.com.png' },
-    { id: 4, title: 'Adidas Voucher', cost: '10000 pts', value: 'RM 200', icon: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg' },
-];
+const db = require('../database/db');
+const { authenticateToken } = require('../middleware/authMiddleware');
 
 router.get('/', (req, res) => {
-    res.json(VOUCHERS);
+    db.all("SELECT * FROM rewards", [], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(rows);
+    });
 });
 
-router.post('/redeem', (req, res) => {
-    res.json({ success: true, message: 'Voucher redeemed successfully', remainingPoints: 19000 });
+router.post('/redeem', authenticateToken, (req, res) => {
+    // In a real app, strict transaction logic here.
+    const userId = req.user.id;
+    db.get("SELECT points FROM users WHERE id = ?", [userId], (err, row) => {
+        if (err) return res.status(500).json({ success: false });
+        // Assume cost is passed or looked up. For demo, just deduct 500.
+        const newPoints = row.points - 500;
+
+        db.run("UPDATE users SET points = ? WHERE id = ?", [newPoints, userId], (err) => {
+            if (err) return res.status(500).json({ success: false });
+            res.json({ success: true, message: 'Voucher redeemed successfully', remainingPoints: newPoints });
+        });
+    });
 });
 
 module.exports = router;

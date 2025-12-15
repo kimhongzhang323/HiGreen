@@ -1,24 +1,35 @@
 const express = require('express');
 const router = express.Router();
-
-const mockNews = [
-    { id: '1', title: 'New Recycling Initiative', date: '2023-11-20', views: 1205, status: 'Published', type: 'News' },
-    { id: '2', title: 'City Park Cleanup', date: '2023-11-18', views: 890, status: 'Published', type: 'News' },
-];
-
-const mockActivities = [
-    { id: '3', title: 'Tree Planting Day', date: '2023-12-01', participants: 45, status: 'Upcoming', type: 'Activity' },
-    { id: '4', title: 'Eco-Workshop', date: '2023-12-05', participants: 20, status: 'Draft', type: 'Activity' },
-];
+const db = require('../database/db');
+const { authenticateToken } = require('../middleware/authMiddleware');
 
 router.get('/', (req, res) => {
-    const type = req.query.type; // 'news' or 'activities'
-    if (type === 'activities') return res.json(mockActivities);
-    res.json(mockNews);
+    const type = req.query.type; // 'news' or 'activities' (stored as 'News' or 'Activity' in DB)
+    let query = "SELECT * FROM content";
+    let params = [];
+
+    if (type) {
+        // Simple mapping if needed, or just match case insensitive
+        let dbType = type === 'news' ? 'News' : 'Activity';
+        query = "SELECT * FROM content WHERE type = ?";
+        params = [dbType];
+    }
+
+    db.all(query, params, (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(rows);
+    });
 });
 
-router.post('/', (req, res) => {
-    res.json({ success: true, message: 'Content created' });
+router.post('/', authenticateToken, (req, res) => {
+    const { title, date, type } = req.body;
+    db.run("INSERT INTO content (title, date, views, status, type) VALUES (?, ?, 0, 'Published', ?)",
+        [title, date, type],
+        function (err) {
+            if (err) return res.status(500).json({ success: false, message: err.message });
+            res.json({ success: true, message: 'Content created' });
+        }
+    );
 });
 
 module.exports = router;
