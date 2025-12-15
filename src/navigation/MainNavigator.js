@@ -35,6 +35,8 @@ import AdminReportsScreen from '../screens/admin/AdminReportsScreen';
 import AdminContentScreen from '../screens/admin/AdminContentScreen';
 import AdminTransportScreen from '../screens/admin/AdminTransportScreen';
 
+import LegalScreen from '../screens/user/LegalScreen';
+
 import { AuthProvider, useAuth } from '../context/AuthContext';
 
 const Stack = createNativeStackNavigator();
@@ -108,12 +110,10 @@ function AppNavigatorContent() {
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     {isAuthenticated ? (
                         user?.role === 'admin' ? (
-                            // Admin Stack
                             <>
                                 <Stack.Screen name="AdminMain" component={AdminNavigator} />
                             </>
                         ) : (
-                            // User Stack
                             <>
                                 <Stack.Screen name="Main" component={AppTabs} />
                                 <Stack.Screen name="ReportIssue" component={ReportIssueScreen} options={{ headerShown: false }} />
@@ -134,6 +134,7 @@ function AppNavigatorContent() {
                                 <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{ headerShown: true, title: 'Edit Profile' }} />
                                 <Stack.Screen name="Rewards" component={RewardsScreen} options={{ headerShown: true, title: 'Rewards', headerStyle: { backgroundColor: theme.colors.primary }, headerTintColor: '#fff' }} />
                                 <Stack.Screen name="PaymentMethods" component={PaymentMethodsScreen} options={{ headerShown: true, title: 'Payment Methods' }} />
+                                <Stack.Screen name="Legal" component={LegalScreen} options={{ headerShown: false }} />
                             </>
                         )
                     ) : (

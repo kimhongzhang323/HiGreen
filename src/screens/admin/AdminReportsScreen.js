@@ -107,47 +107,49 @@ export default function AdminReportsScreen() {
 
         return (
             <Surface style={[styles.reportCard, item.priority === 'P0' && styles.p0Border]} elevation={0}>
-                {/* Priority Stripe */}
-                <View style={[styles.priorityStripe, { backgroundColor: priorityColor }]} />
+                <View style={styles.cardInner}>
+                    {/* Priority Stripe */}
+                    <View style={[styles.priorityStripe, { backgroundColor: priorityColor }]} />
 
-                <View style={styles.cardContent}>
-                    <View style={styles.header}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                            <View style={[styles.priorityBadge, { backgroundColor: priorityColor + '15' }]}>
-                                <Text style={{ color: priorityColor, fontWeight: '800', fontSize: 12 }}>{item.priority}</Text>
+                    <View style={styles.cardContent}>
+                        <View style={styles.header}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                                <View style={[styles.priorityBadge, { backgroundColor: priorityColor + '15' }]}>
+                                    <Text style={{ color: priorityColor, fontWeight: '800', fontSize: 12 }}>{item.priority}</Text>
+                                </View>
+                                <Text style={{ fontWeight: 'bold', color: '#1e293b', fontSize: 16 }}>{item.type}</Text>
                             </View>
-                            <Text style={{ fontWeight: 'bold', color: '#1e293b', fontSize: 16 }}>{item.type}</Text>
+                            <Chip
+                                textStyle={{ fontSize: 10, lineHeight: 10, fontWeight: '700' }}
+                                style={{ backgroundColor: item.status === 'Resolved' ? '#dcfce7' : '#fee2e2', height: 24 }}
+                            >
+                                {item.status}
+                            </Chip>
                         </View>
-                        <Chip
-                            textStyle={{ fontSize: 10, lineHeight: 10, fontWeight: '700' }}
-                            style={{ backgroundColor: item.status === 'Resolved' ? '#dcfce7' : '#fee2e2', height: 24 }}
-                        >
-                            {item.status}
-                        </Chip>
-                    </View>
 
-                    <Text style={styles.description} numberOfLines={2}>{item.description}</Text>
+                        <Text style={styles.description} numberOfLines={2}>{item.description}</Text>
 
-                    <View style={styles.metaInfo}>
-                        <View style={styles.row}>
-                            <MapPin size={14} color="#94a3b8" />
-                            <Text style={styles.infoText}>{item.location}</Text>
+                        <View style={styles.metaInfo}>
+                            <View style={styles.row}>
+                                <MapPin size={14} color="#94a3b8" />
+                                <Text style={styles.infoText}>{item.location}</Text>
+                            </View>
+                            <View style={styles.row}>
+                                <Calendar size={14} color="#94a3b8" />
+                                <Text style={styles.infoText}>{item.date}</Text>
+                            </View>
                         </View>
-                        <View style={styles.row}>
-                            <Calendar size={14} color="#94a3b8" />
-                            <Text style={styles.infoText}>{item.date}</Text>
-                        </View>
-                    </View>
 
-                    <View style={styles.actions}>
-                        <TouchableOpacity style={[styles.actionBtn, { backgroundColor: '#f8fafc' }]}>
-                            <Text style={{ color: '#64748b', fontWeight: '600' }}>View Details</Text>
-                        </TouchableOpacity>
-                        {item.status === 'Pending' && (
-                            <TouchableOpacity style={[styles.actionBtn, { backgroundColor: item.priority === 'P0' ? '#ef4444' : theme.colors.primary }]}>
-                                <Text style={{ color: '#fff', fontWeight: 'bold' }}>Resolve</Text>
+                        <View style={styles.actions}>
+                            <TouchableOpacity style={[styles.actionBtn, { backgroundColor: '#f8fafc' }]}>
+                                <Text style={{ color: '#64748b', fontWeight: '600' }}>View Details</Text>
                             </TouchableOpacity>
-                        )}
+                            {item.status === 'Pending' && (
+                                <TouchableOpacity style={[styles.actionBtn, { backgroundColor: item.priority === 'P0' ? '#ef4444' : theme.colors.primary }]}>
+                                    <Text style={{ color: '#fff', fontWeight: 'bold' }}>Resolve</Text>
+                                </TouchableOpacity>
+                            )}
+                        </View>
                     </View>
                 </View>
             </Surface>
@@ -239,8 +241,13 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.03,
         shadowRadius: 5,
-        overflow: 'hidden',
+        // No overflow hidden here to allow shadow
+    },
+    cardInner: {
+        flex: 1,
         flexDirection: 'row',
+        overflow: 'hidden',
+        borderRadius: 20, // Match parent radius
     },
     p0Border: {
         borderWidth: 1,
