@@ -27,6 +27,8 @@ const reportRoutes = require('./routes/reportRoutes');
 const contentRoutes = require('./routes/contentRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
 const rewardRoutes = require('./routes/rewardRoutes');
+const happinessRoutes = require('./routes/happinessRoutes');
+const transportRoutes = require('./routes/transportRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
@@ -34,6 +36,8 @@ app.use('/api/reports', reportRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/rewards', rewardRoutes);
+app.use('/api/happiness', happinessRoutes);
+app.use('/api/transport', transportRoutes);
 
 // Root Endpoint
 app.get('/', (req, res) => {

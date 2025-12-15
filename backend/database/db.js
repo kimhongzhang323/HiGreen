@@ -48,6 +48,27 @@ function initDb() {
             type TEXT
         )`);
 
+        // Happiness Logs
+        db.run(`CREATE TABLE IF NOT EXISTS happiness_logs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            userId INTEGER,
+            score REAL,
+            date TEXT,
+            notes TEXT,
+            FOREIGN KEY(userId) REFERENCES users(id)
+        )`);
+
+        // Transport Logs
+        db.run(`CREATE TABLE IF NOT EXISTS transport_logs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            userId INTEGER,
+            mode TEXT,
+            distance REAL,
+            co2_saved REAL,
+            date TEXT,
+            FOREIGN KEY(userId) REFERENCES users(id)
+        )`);
+
         // Rewards Table
         db.run(`CREATE TABLE IF NOT EXISTS rewards(
             id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "node tests/auth.test.js && node tests/reports.test.js && node tests/rewards.test.js && node tests/happiness.test.js && node tests/transport.test.js"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^7.8.12",
