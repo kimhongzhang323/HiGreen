@@ -70,17 +70,13 @@ export default function HomeScreen({ navigation }) {
             >
                 <View style={styles.headerContent}>
                     <View>
-                        <Text variant="titleMedium" style={{ color: 'rgba(255,255,255,0.8)' }}>Good Morning,</Text>
+                        {/* UPDATED HEADER: No Points, Welcome Back */}
+                        <Text variant="titleMedium" style={{ color: 'rgba(255,255,255,0.8)' }}>Welcome back</Text>
                         <Text variant="headlineMedium" style={{ color: '#fff', fontWeight: 'bold' }}>Kimmy</Text>
-                    </View>
-                    <View style={styles.pointsContainer}>
-                        <Leaf size={20} color="#FFD700" />
-                        <Text style={styles.pointsText}>850 Pts</Text>
                     </View>
                 </View>
             </LinearGradient>
 
-            {/* Impact Summary - Moved out of Header with negative margin */}
             {/* Impact Summary - Moved out of Header with negative margin */}
             <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate('WeeklyImpact')}>
                 <Surface style={styles.impactCard} elevation={4}>
@@ -99,7 +95,7 @@ export default function HomeScreen({ navigation }) {
                 </Surface>
             </TouchableOpacity>
 
-            {/* NEW: Gamification Gap Filler */}
+            {/* Gamification Gap Filler */}
             <View style={styles.section}>
                 <DailyStreakCard theme={theme} />
             </View>
@@ -209,7 +205,11 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
     },
-    // ...
+    headerContent: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
     impactCard: {
         marginTop: -60, // Slight overlap
         marginHorizontal: 20,
