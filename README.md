@@ -1,197 +1,148 @@
-# 🌿 HiGreen
+# 🌿 HiGreen - Full Stack Sustainability Ecosystem
 
 <p align="center">
   <img src="assets/icon.png" alt="HiGreen Logo" width="120" height="120">
 </p>
 
 <p align="center">
-  <strong>Your Personal Sustainability Companion</strong><br>
-  A mobile app empowering users to live greener, track their environmental impact, and contribute to a sustainable future.
+  <strong>Your Personal Sustainability Companion & Smart City Dashboard</strong><br>
+  A comprehensive platform empowering citizens to live greener and city administrators to make data-driven decisions.
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/React%20Native-0.81.5-blue?logo=react" alt="React Native">
+  <img src="https://img.shields.io/badge/Node.js-18.x-green?logo=nodedotjs" alt="Node.js">
+  <img src="https://img.shields.io/badge/Express-4.18-gray?logo=express" alt="Express">
+  <img src="https://img.shields.io/badge/SQLite-3.x-blue?logo=sqlite" alt="SQLite">
   <img src="https://img.shields.io/badge/Expo-54.0-black?logo=expo" alt="Expo">
-  <img src="https://img.shields.io/badge/Platform-iOS%20%7C%20Android%20%7C%20Web-green" alt="Platform">
-  <img src="https://img.shields.io/badge/License-Private-red" alt="License">
 </p>
 
 ---
 
 ## 📱 Features
 
-### 🏠 Dashboard
-- **Weekly Impact Tracking** - Visualize your CO2 savings with interactive charts
-- **Daily Streak & Gamification** - Stay motivated with streak counters and achievement levels
-- **Points System** - Earn points for eco-friendly actions
+### 👤 User Application
+*   **Weekly Impact Tracking**: Visualize carbon footprint via interactive charts.
+*   **Gamification**: Earn points, unlock badges ("Eco Starter"), and maintain daily streaks.
+*   **Rewards Center**: Premium "Loyalty Card" interface to redeem points for vouchers (Amazon, Grab, Starbucks).
+*   **Report Issues**: Submit P0-P2 priority reports for city maintenance (potholes, dumping).
+*   **Smart Chatbot**: AI-powered sustainability tips.
+*   **Transport Tracker**: Log EV/Public Transport usage.
 
-### 🌍 Environmental Tools
-- **Air Quality Monitor** - Real-time air quality data for your location
-- **Green Map** - Discover eco-friendly locations and green spaces near you
-
-### 🚌 Sustainable Transport
-- **Transport Tracker** - Log your sustainable transportation choices
-- **Carbon Footprint Calculator** - Track emissions saved by choosing green transit
-
-### 📊 Reporting System
-- **Report Issues** - Report environmental concerns in your community
-- **My Reports** - Track the status of your submitted reports
-
-### 🤖 AI Assistant
-- **Smart Chatbot** - Get personalized sustainability tips and advice powered by AI
-
-### 😊 Happiness & Wellness
-- **Happiness Survey** - Track how sustainable living impacts your well-being
-
-### 🆘 Emergency Services
-- **SOS Feature** - Quick access to emergency services when needed
-
-### 👤 Profile & Rewards
-- **User Profile Management** - Customize your profile and preferences
-- **Rewards System** - Redeem points for eco-friendly rewards
-- **Payment Methods** - Manage payment options for premium features
+### 🛡️ Admin Dashboard
+*   **Overview Stats**: Real-time metrics on Users, Reports, and CO2 Savings.
+*   **Transport Analytics**: Heatmaps and data on EV Toll usage and Ridership (Bus/MRT/LRT).
+*   **Content Management**: Manage News and Community Activities.
+*   **Advanced Reporting**: Filter reports by Status (Pending/Resolved) and Priority (P0 Critical).
+*   **User Management**: View user profiles and engagement metrics.
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category | Technology |
-|----------|------------|
-| **Framework** | React Native 0.81.5 |
-| **Platform** | Expo SDK 54 |
-| **Navigation** | React Navigation 7.x |
-| **UI Components** | React Native Paper |
-| **Maps** | React Native Maps |
-| **Charts** | React Native Chart Kit |
-| **Icons** | Lucide React Native |
-| **Styling** | Expo Linear Gradient |
+### Frontend (User & Admin App)
+*   **Framework**: React Native (Expo)
+*   **UI Library**: React Native Paper ("Pro" Soft UI Design)
+*   **Navigation**: React Navigation (Bottom Tabs, Stacks)
+*   **Charts**: React Native Chart Kit
+*   **Icons**: Lucide React Native
+
+### Backend (API & Data)
+*   **Runtime**: Node.js
+*   **Framework**: Express.js
+*   **Database**: SQLite (Local persistent storage)
+*   **Security**:
+    *   **Bcrypt**: Password hashing
+    *   **JWT**: Secure session tokens
+    *   **Helmet/RateLimit**: API protection
+    *   **Input Validation**: Express-Validator
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+*   Node.js (v18+)
+*   npm or yarn
+*   Expo Go app (for mobile testing)
 
-- [Node.js](https://nodejs.org/) (v18 or later recommended)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- [Expo CLI](https://docs.expo.dev/get-started/installation/)
-- [Expo Go](https://expo.dev/client) app on your mobile device (for testing)
+### 1️⃣ Backend Setup (API)
+The backend manages the database, authentication, and logic.
 
-### Installation
+1.  Navigate to the backend folder:
+    ```bash
+    cd backend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Start the server:
+    ```bash
+    npm start
+    ```
+    > Server runs on `http://localhost:3000`. Database `higreen.db` will be initialized automatically.
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/kimhongzhang323/HiGreen.git
-   cd HiGreen
-   ```
+### 2️⃣ Frontend Setup (App)
+Open a **new terminal** window for the React Native app.
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables**
-   
-   Create a `.env` file in the root directory and add your API keys:
-   ```env
-   GEMINI_API_KEY=your_api_key_here
-   ```
-
-4. **Start the development server**
-   ```bash
-   npm start
-   ```
-
-5. **Run on your preferred platform**
-   ```bash
-   # iOS
-   npm run ios
-
-   # Android
-   npm run android
-
-   # Web
-   npm run web
-   ```
+1.  Navigate to the root folder:
+    ```bash
+    cd ..
+    # (Ensure you are in the project root, not inside /backend)
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Start the app:
+    ```bash
+    npm start
+    ```
+4.  Scan the QR code with **Expo Go** (Android/iOS).
 
 ---
 
-## 📁 Project Structure
+## 🧪 Testing & QA
+
+We strictly maintain code quality using a dedicated Test Suite.
+
+### Unit Tests
+Verify logic for Auth, Reports (Priority), and Rewards (Points).
+
+```bash
+# From the root directory:
+node tests/auth.test.js
+node tests/reports.test.js
+node tests/rewards.test.js
+```
+
+### Risk Assessment
+See `tests/risk_assessment.md` for a detailed breakdown of security architectures and mitigation strategies implemented in this project.
+
+---
+
+## 📂 Project Structure
 
 ```
 HiGreen/
-├── App.js                    # App entry point
-├── app.json                  # Expo configuration
-├── package.json              # Dependencies and scripts
-├── assets/                   # Images, icons, and static assets
-└── src/
-    ├── config.js             # App configuration
-    ├── components/           # Reusable UI components
-    ├── context/
-    │   └── AuthContext.js    # Authentication state management
-    ├── navigation/
-    │   └── MainNavigator.js  # App navigation structure
-    ├── screens/
-    │   ├── auth/             # Login & Registration
-    │   ├── chatbot/          # AI Assistant
-    │   ├── dashboard/        # Home screen
-    │   ├── environment/      # Air quality & Green map
-    │   ├── gamification/     # Tasks & achievements
-    │   ├── happiness/        # Wellness surveys
-    │   ├── profile/          # Profile management
-    │   ├── reports/          # Issue reporting
-    │   ├── sos/              # Emergency services
-    │   ├── transport/        # Transport tracking
-    │   └── user/             # User profile
-    ├── services/             # API services
-    ├── theme/                # App theming (colors, styles)
-    └── utils/                # Utility functions
+├── backend/                  # Node.js Server
+│   ├── database/             # SQLite DB file & init script
+│   ├── middleware/           # Auth & Security middleware
+│   ├── routes/               # API Endpoints (Auth, User, Reports...)
+│   └── server.js             # Entry Point
+├── tests/                    # QA Suite
+│   ├── auth.test.js          # Logic tests
+│   └── risk_assessment.md    # Security Audit
+├── src/                      # React Native App
+│   ├── navigation/           # Admin & User Navigators
+│   ├── screens/              # All UI Screens
+│   ├── context/              # Auth Context
+│   └── theme/                # Design System
+└── App.js                    # Main Application Entry
 ```
-
----
-
-## 🎨 Screenshots
-
-<p align="center">
-  <i>Coming soon...</i>
-</p>
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ---
 
 ## 📄 License
-
-This project is private and proprietary. All rights reserved.
-
----
-
-## 👨‍💻 Author
-
-**Kim Hong Zhang**
-
-- GitHub: [@kimhongzhang323](https://github.com/kimhongzhang323)
-
----
-
-## 🙏 Acknowledgments
-
-- [Expo](https://expo.dev/) for the amazing development platform
-- [React Native Paper](https://callstack.github.io/react-native-paper/) for beautiful Material Design components
-- [Lucide Icons](https://lucide.dev/) for the stunning icon set
-
----
-
-<p align="center">
-  Made with 💚 for a greener planet
-</p>
+Private and Proprietary. Made with 💚 by **Kim Hong Zhang**.
