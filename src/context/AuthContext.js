@@ -9,7 +9,11 @@ export const AuthProvider = ({ children }) => {
     const login = (email, password) => {
         // Mock Login Logic
         setIsAuthenticated(true);
-        setUser({ name: 'Kimmy', email: email || 'guest@example.com' });
+        if (email === 'admin' && password === '123') {
+            setUser({ name: 'Administrator', email: email, role: 'admin' });
+        } else {
+            setUser({ name: 'Kimmy', email: email || 'guest@example.com', role: 'user' });
+        }
     };
 
     const loginAsGuest = () => {

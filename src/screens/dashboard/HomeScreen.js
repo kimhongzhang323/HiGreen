@@ -81,17 +81,23 @@ export default function HomeScreen({ navigation }) {
             </LinearGradient>
 
             {/* Impact Summary - Moved out of Header with negative margin */}
-            <Surface style={styles.impactCard} elevation={4}>
-                <Text variant="titleMedium" style={styles.cardTitle}>Your Weekly Impact</Text>
-                <LineChart
-                    data={data}
-                    width={screenWidth - 60}
-                    height={180}
-                    chartConfig={chartConfig}
-                    bezier
-                    style={styles.chart}
-                />
-            </Surface>
+            {/* Impact Summary - Moved out of Header with negative margin */}
+            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate('WeeklyImpact')}>
+                <Surface style={styles.impactCard} elevation={4}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', alignItems: 'center', marginBottom: 10 }}>
+                        <Text variant="titleMedium" style={styles.cardTitle}>Your Weekly Impact</Text>
+                        <Leaf size={20} color={theme.colors.primary} />
+                    </View>
+                    <LineChart
+                        data={data}
+                        width={screenWidth - 60}
+                        height={180}
+                        chartConfig={chartConfig}
+                        bezier
+                        style={styles.chart}
+                    />
+                </Surface>
+            </TouchableOpacity>
 
             {/* NEW: Gamification Gap Filler */}
             <View style={styles.section}>
